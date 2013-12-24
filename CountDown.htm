@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Countdown Example</title>
+    <style type="text/css">
+        body { font-family: Verdana, Arial, Sans-Serif; color: black; font-size: 10pt; text-align: center; }
+        h2 { color: Olive; }
+    </style>
+    <script type="text/javascript">
+        function resetdate() {
+            var d1 = new Date();
+            var d2 = new Date(document.getElementById("txtdate").value);
+            var oneday = 1000 * 60 * 60 * 24;
+            document.getElementById("dayshere").innerHTML = (Math.ceil((d2.getTime() - d1.getTime()) / (oneday)))
+        }
+    </script>
+</head>
+<body>
+    <div id="wrapper" style="margin: 0px auto; text-align: left; width: 500px;">
+        <p>
+            <a href="default.htm">Back to LittleRaft</a></p>
+        <p>This is a very, very simple javascript sample that displays the number of days left
+            until a specified date. It only refreshes with the page or on the button click,
+            not on a timer.</p>
+        <p>There is no format checking, so enter the date as mm/dd/yyyy or the calculation will
+            not work.</p>
+        <h2>
+        <label id="dayshere">
+        </label>
+        days until the date!</h2>
+        Enter a new date:
+        <input type="text" id="txtdate" value="08/15/2014" />
+        <input type="button" id="btn" onclick="resetdate()" value="Update Counter" />
+        <script type="text/javascript">
+            resetdate();
+        </script>
+    </div>
+</body>
+</html>

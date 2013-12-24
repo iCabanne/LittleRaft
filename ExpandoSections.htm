@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <style type="text/css">
+        .expandotitle { cursor: pointer; }
+        .expandodiv { display: none; }
+        .styled { font-family: tahoma, arial,sans-serif; width: auto; font-size: 14px; color: #333333; }
+        .styled h3 { color: #3d5b8c; font-size: 14px; font-weight: normal; padding: 1em .5em 0 .5em; }
+        .styled .expandotitle { background-color: #d1daeb; padding: 10px; }
+        .styled .expandodiv { background-color: #ffffff; margin: 10px 0px; padding: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
+        .tlrad { border-top-left-radius: 10px; -webkit-border-top-left-radius: 10px; -moz-border-radius-topleft: 10px; }
+        .trrad { border-top-right-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topright: 10px; }
+        .blrad { border-bottom-left-radius: 10px; -webkit-border-bottom-left-radius: 10px; -moz-border-radius-bottomleft: 10px; }
+        .brrad { border-bottom-right-radius: 10px; -webkit-border-bottom-right-radius: 10px; -moz-border-radius-bottomright: 10px; }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.expandotitle').click(function () {
+                $('.expandodiv').not($(this).children('.expandodiv')).slideUp();
+                $(this).children('.expandodiv').slideToggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <p>
+        <a href="Default.htm">Back to LittleRaft</a></p>
+    <h3>1. Functionality with no styling</h3>
+    <div class="expandotitle">
+        Section 1 - Click on this or any other section title to expand the section.
+        <div class="expandodiv">
+            <p>jQuery UI has a beautiful expanding section control, but building your own is very
+                simple, and leaves full control in your hands for all the styling and content handling,
+                without loading any additional libraries.</p>
+            <p>This example only has one section open at a time, but you can allow all opened sections
+                to stay open by removing the "slideUp()" line from the javascript.</p>
+            <p>Open other sections to see the components.</p>
+        </div>
+    </div>
+    <div class="expandotitle">
+        Section 2
+        <div class="expandodiv">
+            <p>Code for opening and closing:<br />
+                $(document).ready(function () {<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;$('.expandotitle').click(function () {<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.expandodiv').not($(this).children('.expandodiv')).slideUp();<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).children('.expandodiv').slideToggle();<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;});<br />
+                });</p>
+        </div>
+    </div>
+    <div class="expandotitle">
+        Section 3
+        <div class="expandodiv">
+            <p>css:<br />
+                .expandotitle { cursor: pointer; }<br />
+                .expandodiv { display: none; } </p>
+        </div>
+    </div>
+    <div class="expandotitle">
+        Section 4
+        <div class="expandodiv">
+            <p>Sample sections:<br />
+                &lt;div class="expandotitle"&gt;Section n<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="expandodiv"&gt;Hello World&lt;/div&gt;<br />
+                &lt;/div&gt;</p>
+        </div>
+    </div>
+    <div class="styled">
+        <h3>2. With just a little bit of styling</h3>
+        <div class="expandotitle tlrad trrad">
+            Section 1
+            <div class="expandodiv">
+                <p>This version is wrapped in &lt;div class="styled"&gt;&lt;/div&gt;.</p>
+            </div>
+        </div>
+        <div class="expandotitle">
+            Section 2
+            <div class="expandodiv">
+                <p>Code for opening and closing:<br />
+                    $(document).ready(function () {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;$('.expandotitle').click(function () {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.expandodiv').not($(this).children('.expandodiv')).slideUp();<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).children('.expandodiv').slideToggle();<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;});<br />
+                    });</p>
+            </div>
+        </div>
+        <div class="expandotitle">
+            Section 3
+            <div class="expandodiv">
+                <p>css:<br />
+                    .expandotitle { cursor: pointer; }<br />
+                    .expandodiv { display: none; } </p>
+            </div>
+        </div>
+        <div class="expandotitle blrad brrad">
+            Section 4
+            <div class="expandodiv">
+                <p>Sample sections:<br />
+                    &lt;div class="expandotitle"&gt;Section n<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="expandodiv"&gt;Hello World&lt;/div&gt;<br />
+                    &lt;/div&gt;</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

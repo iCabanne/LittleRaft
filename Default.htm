@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Liffte Raft</title>
+    <link rel="Stylesheet" type="text/css" href="site.css" />
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+    <div id="header">
+        <img src="Images/LittleRaft-Text.png" />
+        <p>Some play in a sandbox. I prefer the lake.<br />
+            This site is a test spot for development ideas.<br />
+            Nothing you see here is certain to work, to impress, or to remain.</p>
+    </div>
+    <div class="box">
+        <div class="innerbox">
+            Site Author</div>
+        <div class='toshow small'>
+            <div class="innerbox below">
+                Site created by<br />
+                <a href="http://www.hubbardwoodssoftware.com">Hubbard Woods Software, Inc.</a></div>
+        </div>
+    </div>
+    <a class="linkbox" href="PatternSamples.htm">Pattern Samples</a>
+    <a class="linkbox" href="DotNet/EditInCode.aspx">Grid Modes</a>
+    <a class="linkbox" href="ExpandoSections.htm">Simple Expand</a>
+    <a class="linkbox" href="CountDown.htm">Count Down</a>
+    <a class="linkbox" href="ExpandList.htm">Drop Down List</a>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.box').on('click', function () {
+            if ($(this).find('.toshow').css('display') == 'none') { $(this).find('.toshow').fadeIn('slow'); }
+            else { $(this).find('.toshow').fadeOut('slow'); }
+        });
+    })
+</script>
+</html>

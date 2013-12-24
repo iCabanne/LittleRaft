@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <style type="text/css">
+        /* general */
+        * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+        body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; color: #333333; padding: 10px 20px; }
+        /* style - container */
+        .sbox { display: block; width: auto; max-width: 300px; overflow: hidden; margin: 0; padding: 10px 0 0 0; }
+        .sbox a { color: #333333; text-decoration: none; }
+        /* style - selection list */
+        .slist { cursor: pointer; line-height: 2em; display: block; padding: 5px; margin-top: 2px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border: solid 1px #e2bc55; background-color: #f8eed3; width: auto; max-width: 300px; list-style-type: none; }
+        .slist li { margin: 0; line-height: 2em; padding: 0 5px; width: 85%; }
+        .slist a { display: block; }
+        .slist li:not(.selected) a:hover { font-weight: bold; }
+        .slist li:not(.selected) a:focus { font-weight: bold; }
+        /* style - selected item */
+        .slist.closed li.selected { background-image: url("images/arrowdown.png"); background-position: right; background-repeat: no-repeat; }
+        li.selected { background-color: #ffffff; border: solid 1px #e2bc55; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
+        /* style - pushpin */
+        .spush { float: right; height: 40px; width: 33px; margin-top: -3px; }
+        /* behavior */
+        .eblist li:not(.selected) { display: none; }
+    </style>
+</head>
+<body>
+    <p>
+        <a href="Default.htm">Back to LittleRaft</a></p>
+    <p>This is a jQuery/javascript/css dropdown list with an option to pin the list open.
+        Separate css classes are used to control behavior and appearance.</p>
+    <!-- Wrap the whole control -->
+    <div class="expandbox sbox">
+        <!-- Push Pin -->
+        <img class="pushme out spush" src="Images/PushPinOut.png" />
+        <!-- Selection List -->
+        <ul class="eblist closed slist">
+            <li class="selected" style="display: list-item">
+                <a href="javascript:selectOption('Main');" family="a">Main</a></li>
+            <li>
+                <a href="javascript:selectOption('Quarter Reprieve');" family="a">Quarter Reprieve</a></li>
+            <li>
+                <a href="javascript:selectOption('16 Reprieve');" family="a">16 Reprieve</a></li>
+            <li>
+                <a href="javascript:selectOption('32 Reprieve');" family="a">32 Reprieve</a></li>
+            <li>
+                <a href="javascript:selectOption('Consolation');" family="a">Consolation</a></li>
+            <li>
+                <a href="javascript:selectOption('Consolation Reprieve');" family="a">Consolation Reprieve</a></li></ul>
+    </div>
+    <p class="displayselected"></p>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.eblist li a').click(function () {
+            if ($(this).parent().hasClass('selected')) {
+            }
+            else {
+                $('.eblist li a').parent().removeClass('selected');
+                $(this).parent().addClass('selected');
+            }
+            toggleOpen();
+        })
+        $('.pushme').click(function () {
+            if ($(this).hasClass('out')) {
+                $(this).attr('src', 'Images/PushPinIn.png').attr('title', 'Click to close list.');
+                listOpen();
+            }
+            else {
+                $(this).attr('src', 'Images/PushPinOut.png').attr('title', 'Click to pin list open.');
+                listClose();
+            }
+            $(this).toggleClass('out').toggleClass('in');
+        })
+    });
+    function selectOption(a) { $('.displayselected').html('Functionality is seprately kicked off for ' + a + ' through a javascript call.'); }
+    function toggleOpen() {
+        if ($('.pushme').hasClass('out')) {
+            $('.eblist.open li:not(.selected)').hide();
+            $('.eblist.closed li').show();
+            $('.eblist').toggleClass('open');
+            $('.eblist').toggleClass('closed');
+        }
+    }
+    function listOpen() {
+        $('.eblist li').show();
+        $('.eblist').addClass('open');
+        $('.eblist').removeClass('closed');
+    }
+    function listClose() {
+        $('.eblist li:not(.selected)').hide();
+        $('.eblist').removeClass('open');
+        $('.eblist').addClass('closed');
+    }
+</script>
+</html>
