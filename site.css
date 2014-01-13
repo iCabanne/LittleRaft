@@ -9,7 +9,12 @@ body { padding: 0; margin: 0; background-color: #597e87; background-image: url("
 .linkbox { background: url("images/fadewhite50.png") repeat; }
 .innerbox, .linkbox { padding: 20px; -moz-border-radius: 6px; -webkit-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; cursor: pointer; }
 .innerbox.below { margin-top: 5px; }
+.innerbox p {margin-top:0;}
+.innerbox a {color:#ffffff;}
 .toshow { display: none; }
 .small { font-size: .8em; }
 a.linkbox { color: #ffffff; text-decoration: none; }
+#sailme { cursor: pointer; }
+#sail { position: fixed; left: -100px; clear: all; float: left; top: 40%; }
+#footer { position:fixed; bottom: 5px; right: 10px; font-size:8pt; white-space:nowrap;}
 

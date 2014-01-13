@@ -1,0 +1,249 @@
+﻿<!-- 
+Thanks to: 
+Harry Roberts at csswizardry.com
+Chris Spooner at line25.com
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Little Raft</title>
+    <style type="text/css">
+        /* general */
+        * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+        body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; color: #333333; padding: 10px 20px; }
+        h2 { font-size: 12pt; font-weight: normal; padding-top: 10px; }
+        #footer { height: 100px; }
+        /* HOVER */
+        #hov { list-style: none; padding: 0; }
+        #hov li { position: relative; display: block; background-color: #efefef; width: 100px; padding: 5px; margin-bottom: 5px; }
+        #hov ul { position: absolute; left: -9999px; }
+        #hov li:hover ul, #hov li ul:hover { left: 100px; top: 0; padding: 0; }
+        #hov li ul li { background-color: #ccc; }
+        /* Add a border to mimic a space between the menus so that we so not lose hover state in a gap. */
+        #hov ul { border-left: solid 5px #fff; }
+        /* SIMPLE BAR WITH HOVER DROP DOWN */
+        /* Clear floats */
+        #nav { list-style: none; margin-bottom: 30px; float: left; width: 100%; padding: 0; font-weight: bold; }
+        #nav li { float: left; position: relative; text-align: center; margin-right: 5px; }
+        #nav a { display: block; padding: 5px 20px; width: 100%; color: #fff; background: #015581; text-decoration: none; }
+        /* Adding a background makes the dropdown work properly in IE7+. Make this as close to your page's background as possible (i.e. white page == white background). */
+        /* But! Let's make the background fully transparent where we can, we don't actually want to see it if we can help it... */
+        /* Hide off-screen when not needed (this is more accessible than display:none;) */
+        #nav ul { padding: 0; background: #fff; background: rgba(255, 255, 255, 0); list-style: none; position: absolute; left: -9999px; }
+        /* Introducing a padding between the li and the a give the illusion spaced items */
+        #nav ul li { padding-top: 1px; float: none; }
+        /* Stop text wrapping and creating multi-line dropdown items */
+        #nav ul a { white-space: nowrap; }
+        /* Display the dropdown on hover */
+        /* Bring back on-screen when needed */
+        #nav li:hover ul { left: 0; }
+        /* These create persistent hover states, meaning the top-most link stays 'hovered' 
+            even when your cursor has moved down the list. */
+        #nav li:hover a { background: #157494; text-decoration: underline; }
+        /* The persistent hover state does however create a global style for links even before they're hovered. 
+           Here we undo these effects. */
+        #nav li:hover ul a { text-decoration: none; }
+        #nav li ul li { text-align: left; }
+        /* Here we define the most explicit hover states--what happens when you hover each individual link. */
+        #nav li:hover ul li a:hover { background: #76aab9; text-decoration: underline; }
+        /* GRADIENT BAR WITH HOVER DROP DOWN */
+        .navbox { position: relative; margin: 0 auto; text-align: center; display: block; width: 100%; height: 80px; background: url("Images/menubgblue.png") repeat; padding: 10px 0; }
+        /* In this case we split the CSS funtionality apart from the purely asthetic */
+        #grad { list-style: none; display: inline-table; width: 90%; max-width: 600px; min-width: 400px; }
+        #grad li { position: relative; text-align: center; display: inline-block; }
+        #grad a { display: block; width: 100%; }
+        #grad ul { list-style: none; position: absolute; left: -9999px; }
+        #grad ul li { float: none; }
+        #grad ul a { white-space: nowrap; }
+        #grad li:hover ul { left: 0; }
+        #grad li:hover a { }
+        #grad li:hover ul a { }
+        #grad li ul li { text-align: left; }
+        #grad li:hover ul li a:hover { }
+        /* design details */
+        .blue { margin-bottom: 30px; font-weight: bold; padding: 0 5px; border-radius: 10px; width: auto; background: #efefef; background: linear-gradient(top, #efefef 0%, #bbbbbb 100%); background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); box-shadow: 0px 0px 9px rgba(0,0,0,0.15); }
+        .blue li { margin: 0; width: 20%; }
+        .blue a { padding: 10px 20px; color: #333; text-shadow: 0.1em 0.1em #efefef; text-decoration: none; }
+        .blue ul { padding: 0; background: #fff; background: rgba(255, 255, 255, 0); }
+        .blue ul li { }
+        .blue ul a { }
+        .blue li:hover ul { }
+        .blue li:hover a { color: #fff; text-shadow: none; background: #4b545f; background: linear-gradient(top, #4f5964 0%, #5f6975 40%); background: -moz-linear-gradient(top, #4f5964 0%, #5f6975 40%); background: -webkit-linear-gradient(top, #4f5964 0%,#5f6975 40%); }
+        .blue li:hover ul a { }
+        .blue li ul li { width: 150px; }
+        .blue li:hover ul li a:hover { background: #76aab9; }
+    </style>
+</head>
+<body>
+    <p>
+        <a href="Default.htm">Back to LittleRaft</a></p>
+    <h2>Menu Styles</h2>
+    <p>Menus come in all shapes and sizes. Through the wonder of CSS we can take a simple
+        HTML list and transform it into exactly what we want. Media queries give further
+        flexibility to change the menu to suit the media. These examples draw from many
+        examples and demos posted by generous developers. (I've just started on this page
+        so there is a lot more to come.)</p>
+    <h2>The Basic HTML</h2>
+    <code>&lt;ul&gt;<br />
+        &nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;One&lt;/a&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ul&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;One
+        Sub One&lt;/a&gt;&lt;/li&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;One
+        Sub Two&lt;/a&gt;&lt;/li&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;One
+        Sub Three&lt;/a&gt;&lt;/li&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ul&gt;<br />
+        &nbsp;&nbsp; &lt;/li&gt;<br />
+        &nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;Two&lt;/a&gt;&lt;/li&gt;<br />
+        &nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;Three&lt;/a&gt;&lt;/li&gt;<br />
+        &nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;Four&lt;/a&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ul&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;Four
+        Sub One&lt;/a&gt;&lt;/li&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;Four
+        Sub Two&lt;/a&gt;&lt;/li&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;Four
+        Sub Three&lt;/a&gt;&lt;/li&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ul&gt;<br />
+        &nbsp;&nbsp; &lt;/li&gt;<br />
+        &nbsp;&nbsp; &lt;li&gt;&lt;a href="javascript:void(0);"&gt;Five&lt;/a&gt;&lt;/li&gt;<br />
+        &lt;/ul&gt; </code>
+    <h2>1. No Styling</h2>
+    <ul>
+        <li>
+            <a href="javascript:void(0);">One</a>
+            <ul>
+                <li>
+                    <a href="javascript:void(0);">One Sub One</a></li>
+                <li>
+                    <a href="javascript:void(0);">One Sub Two</a></li>
+                <li>
+                    <a href="javascript:void(0);">One Sub Three</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">Two</a></li>
+        <li>
+            <a href="javascript:void(0);">Three</a></li>
+        <li>
+            <a href="javascript:void(0);">Four</a>
+            <ul>
+                <li>
+                    <a href="javascript:void(0);">Four Sub One</a></li>
+                <li>
+                    <a href="javascript:void(0);">Four Sub Two</a></li>
+                <li>
+                    <a href="javascript:void(0);">Four Sub Three</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">Five</a></li>
+    </ul>
+    <h2>2. Submenus appear on hover</h2>
+    <p>The only change to the HTML is modifying the first line to: <code>&lt;ul id="hov"&gt;</code>.
+        All the CSS applies to <code>#hov</code> and its children.</p>
+    <ul id="hov">
+        <li>
+            <a href="javascript:void(0);">One</a>
+            <ul>
+                <li>
+                    <a href="javascript:void(0);">One Sub One</a></li>
+                <li>
+                    <a href="javascript:void(0);">One Sub Two</a></li>
+                <li>
+                    <a href="javascript:void(0);">One Sub Three</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">Two</a></li>
+        <li>
+            <a href="javascript:void(0);">Three</a></li>
+        <li>
+            <a href="javascript:void(0);">Four</a>
+            <ul>
+                <li>
+                    <a href="javascript:void(0);">Four Sub One</a></li>
+                <li>
+                    <a href="javascript:void(0);">Four Sub Two</a></li>
+                <li>
+                    <a href="javascript:void(0);">Four Sub Three</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">Five</a></li>
+    </ul>
+    <h2>3. Simple bar with hover drop down</h2>
+    <p>The only change to the HTML is modifying the first line to: <code>&lt;ul id="nav"&gt;</code>.
+        All the CSS applies to <code>#nav</code> and its children.</p>
+    <ul id="nav">
+        <li>
+            <a href="javascript:void(0);">One</a>
+            <ul>
+                <li>
+                    <a href="javascript:void(0);">One Sub One</a></li>
+                <li>
+                    <a href="javascript:void(0);">One Sub Two</a></li>
+                <li>
+                    <a href="javascript:void(0);">One Sub Three</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">Two</a></li>
+        <li>
+            <a href="javascript:void(0);">Three</a></li>
+        <li>
+            <a href="javascript:void(0);">Four</a>
+            <ul>
+                <li>
+                    <a href="javascript:void(0);">Four Sub One</a></li>
+                <li>
+                    <a href="javascript:void(0);">Four Sub Two</a></li>
+                <li>
+                    <a href="javascript:void(0);">Four Sub Three</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">Five</a></li>
+    </ul>
+    <h2>4. Gradient bar with hover drop down</h2>
+    <p>In the HTML the first line is changed to: <code>&lt;ul id="grad" class="blue"&gt;</code>.
+        The "grad" CSS controls the menu functionality and basic layout. The "blue" CSS
+        controls color, borders and other design-only details. This menu has also been placed
+        on a background that makes it pop.</p>
+    <div class="navbox">
+        <ul id="grad" class="blue">
+            <li>
+                <a href="javascript:void(0);">One</a>
+                <ul>
+                    <li>
+                        <a href="javascript:void(0);">One Sub One</a></li>
+                    <li>
+                        <a href="javascript:void(0);">One Sub Two</a></li>
+                    <li>
+                        <a href="javascript:void(0);">One Sub Three</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);">Two</a></li>
+            <li>
+                <a href="javascript:void(0);">Three</a></li>
+            <li>
+                <a href="javascript:void(0);">Four</a>
+                <ul>
+                    <li>
+                        <a href="javascript:void(0);">Four Sub One</a></li>
+                    <li>
+                        <a href="javascript:void(0);">Four Sub Two</a></li>
+                    <li>
+                        <a href="javascript:void(0);">Four Sub Three</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);">Five</a></li>
+        </ul>
+    </div>
+    <div id="footer">
+        &nbsp;</div>
+</body>
+</html>

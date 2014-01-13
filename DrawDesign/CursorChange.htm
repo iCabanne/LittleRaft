@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Little Raft</title>
+    <style type="text/css">
+        /* apply a natural box layout model to all elements */
+        * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+        /* the cursor must be a .cur file to work in ie */
+        /* vertical-align: middle is needed to keep the droparea boxes aligned when some empty and some filled */
+        #whiteboard { width: auto; margin: 20px; padding: 10px; height: 300px; border: solid 2px #ccc; }
+        #toolbar { width: auto; margin: 20px; padding: 10px; border: solid 2px #ccc; }
+        #dropvalues { width: auto; margin: 20px; padding: 10px; border: solid 2px #ccc; }
+        .usecursor { cursor: auto; }
+        .drawtool { vertical-align: middle; display: inline-block; margin-right: 5px; height: 40px; width: 40px; text-align: center; padding-top: 6px; }
+        .drawtool { -moz-border-radius: 4px; -webkit-border-radius: 4px; -khtml-border-radius: 4px; border-radius: 4px; border: solid 1px #ccc; }
+        .up { background-color: #fff; }
+        .down { background-color: #efefef; }
+        .dropme { vertical-align: middle; margin-right: 5px; height: 40px; width: 65px; text-align: center; padding-top: 6px; }
+        .dropme { -moz-border-radius: 4px; -webkit-border-radius: 4px; -khtml-border-radius: 4px; border-radius: 4px; border: solid 1px #ccc; }
+        .dropme.out { display: none; }
+        .dropme.in { display: inline-block; }
+        .boxtext { display: inline-block; margin-right: 20px; padding: 0; }
+        .droparea { vertical-align: middle; display: inline-block; margin-right: 5px; height: 40px; width: 65px; text-align: center; padding-top: 6px; }
+        .droparea { -moz-border-radius: 4px; -webkit-border-radius: 4px; -khtml-border-radius: 4px; border-radius: 4px; border: solid 1px #ccc; }
+    </style>
+</head>
+<body>
+    <p>
+        <a href="../default.htm">Back to LittleRaft</a></p>
+    <div id="toolbar">
+        <span class="boxtext">1. Click/touch an icon to select a tool.</span>
+        <div class="drawtool default down">
+            None</div>
+        <div class="drawtool calendar up">
+            <img src="calendar24.png" /></div>
+        <div class="drawtool house up">
+            <img src="hut24.png" /></div>
+        <div class="drawtool clock up">
+            <img src="clock24.png" /></div>
+    </div>
+    <div id="dropvalues">
+        <span class="boxtext">2. Click/touch to select a value.</span>
+        <div class="dropme usecursor clock out none">
+            Clear
+        </div>
+        <div class="dropme usecursor clock out up" myval="9:00 am">
+            9:00 am
+        </div>
+        <div class="dropme usecursor clock out up" myval="9:30 am">
+            9:30 am
+        </div>
+        <div class="dropme usecursor clock out up" myval="10:00 am">
+            10:00 am
+        </div>
+        <div class="dropme usecursor calendar out up none">
+            Clear
+        </div>
+        <div class="dropme usecursor calendar out up" myval="Mon">
+            Mon
+        </div>
+        <div class="dropme usecursor calendar out up" myval="Tue">
+            Tue
+        </div>
+        <div class="dropme usecursor calendar out up" myval="Wed">
+            Wed
+        </div>
+        <div class="dropme usecursor calendar out up" myval="Thu">
+            Thu
+        </div>
+        <div class="dropme usecursor calendar out up" myval="Fri">
+            Fri
+        </div>
+        <div class="dropme usecursor house out up none">
+            Clear
+        </div>
+        <div class="dropme usecursor house out up" myval="Brick">
+            Brick
+        </div>
+        <div class="dropme usecursor house out up" myval="Siding">
+            Siding
+        </div>
+        <div class="dropme usecursor house out up" myval="Stucco">
+            Stucco
+        </div>
+    </div>
+    <div id="whiteboard">
+    <p>3. Click/touch to drop the selected value.</p>
+        <p>When the cursor is over a box, the cursor will change to the selected tool.<br />
+            Click/touch and the selected value will be dropped into the box, overwriting what was
+            thre before.<br />
+            If you drop "Clear" the box will clear out.</p>
+        <div class="droparea usecursor">
+        </div>
+        <div class="droparea usecursor">
+        </div>
+        <div class="droparea usecursor">
+        </div>
+        <div class="droparea usecursor">
+        </div>
+        <div class="droparea usecursor">
+        </div>
+    </div>
+    <input type="hidden" id="dropvalue" value="" />
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dropme').on('click', function () {
+                if ($(this).hasClass('none')) {
+                    $('#dropvalue').val(' ');
+                }
+                else {
+                    $('#dropvalue').val($(this).attr('myval'));
+                }
+            })
+            $('.drawtool').on('click', function () {
+                if ($(this).hasClass('clock up')) {
+                    $('.usecursor').css('cursor', 'url(clock16.cur),auto');
+                    $('#dropvalue').val(' ');
+                    $('.dropme').not('.clock').removeClass('in').addClass('out');
+                    $('.dropme.clock').removeClass('out').addClass('in');
+                    $('.dropme.clock').not('.none').removeClass('down').addClass('up');
+                    $('.dropme.clock.none').removeClass('up').addClass('down');
+                }
+                if ($(this).hasClass('house up')) {
+                    $('.usecursor').css('cursor', 'url(hut16.cur),auto');
+                    $('#dropvalue').val(' ');
+                    $('.dropme').not('.house').removeClass('in').addClass('out');
+                    $('.dropme.house').removeClass('out').addClass('in');
+                    $('.dropme.house').not('.none').removeClass('down').addClass('up');
+                    $('.dropme.house.none').removeClass('up').addClass('down');
+                }
+                if ($(this).hasClass('calendar up')) {
+                    $('.usecursor').css('cursor', 'url(calendar16.cur),auto');
+                    $('#dropvalue').val(' ');
+                    $('.dropme').not('.calendar').removeClass('in').addClass('out');
+                    $('.dropme.calendar').removeClass('out').addClass('in');
+                    $('.dropme.calendar').not('.none').removeClass('down').addClass('up');
+                    $('.dropme.calendar.none').removeClass('up').addClass('down');
+                }
+                if ($(this).hasClass('default')) {
+                    $('.usecursor').css('cursor', 'auto');
+                    $('#dropvalue').val('');
+                    $('.dropme').removeClass('in').addClass('out');
+                }
+                $('.drawtool').not(this).removeClass('down').addClass('up');
+                $(this).removeClass('up').addClass('down');
+            });
+            $('.dropme').on('click', function () {
+                $('.dropme').not(this).removeClass('down').addClass('up');
+                $(this).removeClass('up').addClass('down');
+            });
+            $('.droparea').on('click', function () {
+                if ($('#dropvalue').val() != '') {
+                    $(this).html($('#dropvalue').val());
+                }
+            });
+        })
+    </script>
+</body>
+</html>

@@ -8,17 +8,20 @@
 <body>
     <div id="header">
         <img src="Images/LittleRaft-Text.png" />
-        <p>Some play in a sandbox. I prefer the lake.<br />
+        <p>Some play in a sandbox.
+            <span id="sailme">I prefer the lake.</span><br />
             This site is a test spot for development ideas.<br />
             Nothing you see here is certain to work, to impress, or to remain.</p>
     </div>
     <div class="box">
         <div class="innerbox">
-            Site Author</div>
+            Author & Code</div>
         <div class='toshow small'>
             <div class="innerbox below">
-                Site created by<br />
-                <a href="http://www.hubbardwoodssoftware.com">Hubbard Woods Software, Inc.</a></div>
+                <p>Site created by<br />
+                    <a href="http://www.hubbardwoodssoftware.com">Hubbard Woods Software, Inc.</a></p>
+                <p>Code is located on GitHub at iCabanne/LittleRaft.</p>
+            </div>
         </div>
     </div>
     <a class="linkbox" href="PatternSamples.htm">Pattern Samples</a>
@@ -26,12 +29,28 @@
     <a class="linkbox" href="ExpandoSections.htm">Simple Expand</a>
     <a class="linkbox" href="CountDown.htm">Count Down</a>
     <a class="linkbox" href="ExpandList.htm">Drop Down List</a>
+    <a class="linkbox" href="DotNet/AjaxOptions.aspx">AJAX Options</a>
+    <a class="linkbox" href="MenuStyles.htm">Menu Styles</a>
+    <a class="linkbox" href="DrawDesign/CursorChange.htm">Select a Tool</a>
+    <img id="sail" src="Images/sailboat.png" />
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.box').on('click', function () {
-            if ($(this).find('.toshow').css('display') == 'none') { $(this).find('.toshow').fadeIn('slow'); }
-            else { $(this).find('.toshow').fadeOut('slow'); }
+            if ($(this).find('.toshow').css('display') == 'none') {
+                $(this).find('.toshow').slideDown('slow');
+            }
+            else { $(this).find('.toshow').slideUp('slow'); }
+        });
+        $('#sailme').on('click', function () {
+            $('#sail').animate({ left: '25%', top: "35%" }, 3000, "linear",
+                function () {
+                    $('#sail').animate({ left: '60%', top: "50%" }, 3000, "linear",
+                function () {
+                    $('#sail').animate({ left: '100%', top: "40%" }, 3000, "linear",
+                function () { $('#sail').css('left', '-100px') })
+                })
+                });
         });
     })
 </script>
