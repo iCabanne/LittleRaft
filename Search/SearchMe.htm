@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Little Raft - Search Options</title>
+    <style type="text/css">
+        /* apply a natural box layout model to all elements */
+        * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+        /* */
+        body { background-color: #f6efef; font-family: Arial, Helvetica, sans-serif; font-size: 10pt; }
+        td { vertical-align: top; line-height: 31px; }
+        span { white-space: nowrap; margin-right: 10px; display: inline-block; }
+        td.alpha span { width: 25px; display: inline-block; }
+        .filter { width: auto; margin: 5px 0; padding: 0; }
+        .container { border: solid 2px #006600; background-color: #fff; padding: 10px; overflow: hidden; margin-bottom: 20px; }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <p>
+        <a href="../default.htm">Back to LittleRaft</a></p>
+    <p>This page is a mock-up of a set of criteria for filtering a very big list. It examines
+        layout, wrapping when screen size changes, and interaction of the selection elements.
+        There is no list and no list implementation. It is not optimized for touch screen
+        because it is assumed to be part of administrative functionality that is not suited
+        to small screens and/or touch updating.</p>
+    <div class="container">
+        <p style="line-height: 31px; margin: 0;">
+            <img src="circle1.png" style="float: left; padding-right: 10px;" />Select criteria</p>
+        <table>
+            <tr>
+                <td></td>
+                <td class="alpha">
+                    <span>
+                        <input id="rball" type="radio" name="alpha" class="alpha" checked="checked" />All
+                    </span>
+                    <span>
+                        <input id="Radio5" type="radio" name="alpha" class="alpha" />A </span>
+                    <span>
+                        <input id="Radio6" type="radio" name="alpha" class="alpha" />B </span>
+                    <span>
+                        <input id="Radio7" type="radio" name="alpha" class="alpha" />C </span>
+                    <span>
+                        <input id="Radio8" type="radio" name="alpha" class="alpha" />D </span>
+                    <span>
+                        <input id="Radio9" type="radio" name="alpha" class="alpha" />E </span>
+                    <span>
+                        <input id="Radio10" type="radio" name="alpha" class="alpha" />F </span>
+                    <span>
+                        <input id="Radio11" type="radio" name="alpha" class="alpha" />G </span>
+                    <span>
+                        <input id="Radio12" type="radio" name="alpha" class="alpha" />H </span>
+                    <span>
+                        <input id="Radio13" type="radio" name="alpha" class="alpha" />I </span>
+                    <span>
+                        <input id="Radio14" type="radio" name="alpha" class="alpha" />J </span>
+                    <span>
+                        <input id="Radio15" type="radio" name="alpha" class="alpha" />K </span>
+                    <span>
+                        <input id="Radio16" type="radio" name="alpha" class="alpha" />L </span>
+                    <span>
+                        <input id="Radio17" type="radio" name="alpha" class="alpha" />M </span>
+                    <span>
+                        <input id="Radio18" type="radio" name="alpha" class="alpha" />N </span>
+                    <span>
+                        <input id="Radio19" type="radio" name="alpha" class="alpha" />O </span>
+                    <span>
+                        <input id="Radio20" type="radio" name="alpha" class="alpha" />P </span>
+                    <span>
+                        <input id="Radio21" type="radio" name="alpha" class="alpha" />Q </span>
+                    <span>
+                        <input id="Radio22" type="radio" name="alpha" class="alpha" />R </span>
+                    <span>
+                        <input id="Radio23" type="radio" name="alpha" class="alpha" />S </span>
+                    <span>
+                        <input id="Radio24" type="radio" name="alpha" class="alpha" />T </span>
+                    <span>
+                        <input id="Radio25" type="radio" name="alpha" class="alpha" />U </span>
+                    <span>
+                        <input id="Radio26" type="radio" name="alpha" class="alpha" />V </span>
+                    <span>
+                        <input id="Radio27" type="radio" name="alpha" class="alpha" />W </span>
+                    <span>
+                        <input id="Radio3" type="radio" name="alpha" class="alpha" />X</span>
+                    <span>
+                        <input id="Radio2" type="radio" name="alpha" class="alpha" />Y </span>
+                    <span>
+                        <input id="Radio1" type="radio" name="alpha" class="alpha" />Z </span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space: nowrap;">AND&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <span>
+                        <input id="Checkbox1" type="checkbox" class="grpall" checked="checked" />All
+                    </span>
+                    <span>
+                        <input id="Checkbox4" type="checkbox" class="group" />Men </span>
+                    <span>
+                        <input id="Checkbox5" type="checkbox" class="group" />Women </span>
+                    <span>
+                        <input id="Checkbox2" type="checkbox" class="group" />Not in any Teams</span>
+                    <span>
+                        <input id="Checkbox3" type="checkbox" class="group" />No Picture</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="white-space: nowrap;">AND&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <span>First Name Includes
+                        <input id="Text2" type="text" class="srchtxt" />
+                    </span>
+                    <span>Last Name Includes
+                        <input id="Text1" type="text" class="srchtxt" />
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <p style="line-height: 31px; margin: 10px 0;">
+            <img src="circle2.png" style="float: left; padding-right: 10px;" />
+            <input id="btnupdate" type="button" value="Update List" style="height: 31px;" /></p>
+        <p style="line-height: 31px; margin: 10px 0;">
+            <span style="float: left; padding-right: 10px;">
+                <img src="circle3.png" style="float: left; padding-right: 10px;" />Select a Player
+                to View/Edit, Or...</span>
+            <span style="float: left; padding-right: 10px;">
+                <input id="Button2" type="button" value="Add New Player" style="height: 31px;" />&nbsp;
+                Or...</span>
+            <span style="float: left; padding-right: 10px;">
+                <input id="Button3" type="button" value="Export List" style="height: 31px;" /></span></p>
+        <span style="float: left; padding-right: 10px;">
+            <img src="circle4.png" style="float: left; padding-right: 10px;" />
+            <input id="btnreset" type="button" value="Reset Criteria" style="height: 31px;" /></span></p>
+    </div>
+    <div class="container">
+        <p>Here is the list</p>
+        <p id="plist">Not yet updated</p>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ncount = 1
+            $('.grpall').on('click', function () {
+                if ($(this).prop('checked')) {
+                    $('.group').prop('checked', false);
+                }
+            })
+            $('.group').on('click', function () {
+                if ($(this).prop('checked')) {
+                    $('.grpall').prop('checked', false);
+                }
+            })
+            $('#btnreset').on('click', function () {
+                $('#rball').prop('checked', true);
+                $('.group').prop('checked', false);
+                $('.grpall').prop('checked', true);
+                $('.srchtxt').val('');
+            })
+            $('#btnupdate').on('click', function () {
+                $('#plist').html('Update #' + ncount);
+                ncount = ncount + 1;
+            })
+        })
+    </script>
+</body>
+</html>
