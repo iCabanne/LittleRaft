@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Little Raft - Swipe</title>
+    <style type="text/css">
+        /* apply a natural box layout model to all elements */
+        * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+        /* */
+        body { font-family: Georgia, "Times New Roman" ,Serif; font-size: 12pt; color: #333; }
+        #swipe1, #swipe2 { border: solid 1px #666; background-color: #eee; margin: 20px; padding: 20px; text-align: center; }
+        #swipe1 { height: 200px; width: 800px; }
+        #swipe2 { height: auto; width: 800px; overflow: hidden; }
+        .outerwrap { display: inline-block; white-space: nowrap; width: 150px; overflow: hidden; padding: 0; }
+        .innerwrap { position: relative; white-space: nowrap; left: 0px; padding: 0; margin: 0; }
+        .inner { border: solid 1px pink; margin: 0; position: relative; padding: 10px 20px; background-color: white; height: 200px; width: 147px; display: inline-block; }
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <p>
+        <a href="default.htm">Back to LittleRaft</a></p>
+    <p>This page tests swipe gestures on a touch screen.</p>
+    <div id="swipe1">
+        <a href="default.htm">Back to LittleRaft</a>
+        <p>Swipe me to change size.</p>
+        <p>A link is inside this box to test excluding elements from the swipe of the container.
+            The link should work as a link is expected to worrk.</p>
+        <p class="report1"></p>
+    </div>
+    <div id="swipe2">
+        <p>Swipe me to slide between columns. Columns slide in direction of swipe.</p>
+        <div class="outerwrap">
+            <div class="innerwrap">
+                <div class="inner">
+                    Column 1</div>
+                <div class="inner">
+                    Column 2</div>
+                <div class="inner">
+                    Column 3</div>
+                <div class="inner">
+                    Column 4</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        var swipestart = new Date();
+        var swipex = 0;
+        var swipey = 0;
+
+        $(document).ready(function () {
+
+            // It's not enough to exclude the link from the swipe, 
+            // we must also keep the touch from bubbling to the div.
+            $('#swipe1 a').bind('touchstart touchend', function (event) {
+                event.stopPropagation();
+            })
+
+            // Capture the start of the swipe.
+            $('#swipe2').bind('touchstart', function (event) {
+                swipex = event.originalEvent.touches[0].pageX;
+                swipey = event.originalEvent.touches[0].pageY;
+                swipestart = new Date();
+                event.stopPropagation();
+                event.preventDefault();
+            })
+
+            // Capture the end of the swipe, evaluate, and act (or not).
+            $('#swipe2').bind('touchend', function (event) {
+                var swipeend = new Date();
+                var swipeseconds = (swipeend.getTime() - swipestart.getTime()) / 1000;
+                var distx = (swipex - event.originalEvent.changedTouches[0].pageX);
+                var disty = (swipey - event.originalEvent.changedTouches[0].pageY);
+                if ((Math.abs(distx) > 30) && (Math.abs(disty) < 75) && (swipeseconds < 1)) {
+                    if (distx > 0) {
+                        if ($('.innerwrap').css('left') == "0px") {
+                            $('.innerwrap').animate({ left: '-150px' });
+                        }
+                        else if ($('.innerwrap').css('left') == "-150px") {
+                            $('.innerwrap').animate({ left: '-300px' });
+                        }
+                        else if ($('.innerwrap').css('left') == "-300px") {
+                            $('.innerwrap').animate({ left: '-450px' });
+                        }
+                    }
+                    else {
+                        if ($('.innerwrap').css('left') == "-450px") {
+                            $('.innerwrap').animate({ left: '-300px' });
+                        }
+                        else if ($('.innerwrap').css('left') == "-150px") {
+                            $('.innerwrap').animate({ left: '0px' });
+                        }
+                        else if ($('.innerwrap').css('left') == "-300px") {
+                            $('.innerwrap').animate({ left: '-150px' });
+                        }
+                    }
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+                swipex = 0;
+                swipey = 0;
+            })
+            // Capture the start of the swipe.
+            $('#swipe1').not('#swipe1 a').bind('touchstart', function (event) {
+                swipex = event.originalEvent.touches[0].pageX;
+                swipey = event.originalEvent.touches[0].pageY;
+                swipestart = new Date();
+                event.stopPropagation();
+                event.preventDefault();
+            })
+
+            // Capture the end of the swipe, evaluate, and act (or not).
+            $('#swipe1').not('#swipe1 a').bind('touchend', function (event) {
+                var swipeend = new Date();
+                var swipeseconds = (swipeend.getTime() - swipestart.getTime()) / 1000;
+                var distx = Math.abs(swipex - event.originalEvent.changedTouches[0].pageX);
+                var disty = Math.abs(swipey - event.originalEvent.changedTouches[0].pageY);
+                if ((distx > 30) && (disty < 75) && (swipeseconds < 1)) {
+                    if ($('#swipe1').css('width') == "800px") { $('#swipe1').css('width', "400px"); }
+                    else { $('#swipe1').css('width', "800px"); }
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+                swipex = 0;
+                swipey = 0;
+            })
+        })
+
+        //        function swipesize(a) {
+        //            alert('hi');
+        //            if ($(a).css('width') > 800) { $(a).css('width', 400); }
+        //            else { $(a).css('width', $(a).css('width') + 100); }
+        //        }
+    </script>
+</body>
+</html>
